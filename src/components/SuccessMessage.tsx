@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, MessageCircle, Home } from "lucide-react";
 
@@ -26,6 +27,14 @@ export const SuccessMessage = ({ data, onBackHome }: SuccessMessageProps) => {
   );
 
   const whatsappLink = `https://wa.me/${adminWhatsApp}?text=${whatsappMessage}`;
+
+  // Abre WhatsApp automaticamente ao carregar
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.open(whatsappLink, "_blank");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [whatsappLink]);
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20">
