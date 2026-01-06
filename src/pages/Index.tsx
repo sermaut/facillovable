@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { RequestForm } from "@/components/RequestForm";
 import { SuccessMessage } from "@/components/SuccessMessage";
+import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 
 interface SuccessData {
@@ -47,6 +48,7 @@ const Index = () => {
       <Header />
       <Hero onRequestClick={scrollToForm} />
       <RequestForm onSuccess={handleSuccess} />
+      <FAQ />
       <Footer />
     </div>
   );

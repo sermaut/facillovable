@@ -21,6 +21,7 @@ type CreditRequest = Database["public"]["Tables"]["credit_requests"]["Row"];
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +54,34 @@ const Admin = () => {
       if (roleData) {
         setIsAuthenticated(true);
       }
+    }
+  };
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Conta criada!",
+        description: "Conta criada com sucesso. Agora faça login.",
+      });
+      setIsSignUp(false);
+    } catch (error: any) {
+      toast({
+        title: "Erro no cadastro",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -190,10 +219,10 @@ const Admin = () => {
           <div className="max-w-md mx-auto">
             <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
               <h1 className="font-display text-2xl font-bold text-foreground mb-6 text-center">
-                Painel Admin
+                {isSignUp ? "Criar Conta Admin" : "Painel Admin"}
               </h1>
               
-              <form onSubmit={handleLogin} className="space-y-4">
+              <form onSubmit={isSignUp ? handleSignUp : handleLogin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -224,9 +253,19 @@ const Admin = () => {
                   size="lg"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Entrando..." : "Entrar"}
+                  {isLoading ? "Aguarde..." : (isSignUp ? "Criar Conta" : "Entrar")}
                 </Button>
               </form>
+              
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setIsSignUp(!isSignUp)}
+                  className="text-sm text-primary hover:underline"
+                >
+                  {isSignUp ? "Já tem conta? Fazer login" : "Criar nova conta"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
