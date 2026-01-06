@@ -10,22 +10,22 @@ interface CreditPackagesProps {
 const packages = [
   {
     amount: 10,
-    price: "2.500 Kz",
-    priceUsd: "~$3",
+    price: "750 Kz",
+    priceUsd: "~$0.80",
     popular: false,
     features: ["10 Créditos Lovable", "Suporte básico", "Entrega em 12h"],
   },
   {
     amount: 20,
-    price: "4.500 Kz",
-    priceUsd: "~$5",
+    price: "1.500 Kz",
+    priceUsd: "~$1.60",
     popular: true,
     features: ["20 Créditos Lovable", "Suporte prioritário", "Entrega em 6h", "Bónus +2 créditos"],
   },
   {
     amount: 50,
-    price: "10.000 Kz",
-    priceUsd: "~$12",
+    price: "3.500 Kz",
+    priceUsd: "~$3.80",
     popular: false,
     features: ["50 Créditos Lovable", "Suporte VIP", "Entrega em 3h", "Bónus +5 créditos"],
   },
