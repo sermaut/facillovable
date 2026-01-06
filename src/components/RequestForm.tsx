@@ -80,14 +80,7 @@ export const RequestForm = ({ onSuccess }: RequestFormProps) => {
       return;
     }
 
-    if (!isFreeRequest && !paymentProof) {
-      toast({
-        title: "Comprovante necessário",
-        description: "Por favor, anexe o comprovante de pagamento",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Comprovante só é obrigatório se o link já foi usado (não é primeira solicitação)
 
     setIsLoading(true);
 
@@ -238,22 +231,23 @@ export const RequestForm = ({ onSuccess }: RequestFormProps) => {
             isFreeRequest={isFreeRequest || false}
           />
 
-          {!isFreeRequest && linkChecked && (
+          {linkChecked && (
             <div className="bg-card rounded-2xl p-6 md:p-8 shadow-card border border-border space-y-6">
-              <div className="p-4 rounded-xl bg-accent border border-primary/20">
-                <h3 className="font-display font-semibold text-foreground mb-3">
-                  Dados para Pagamento
-                </h3>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <p><strong>Multicaixa Express:</strong> 923 456 789</p>
-                  <p><strong>BAI (Transferência):</strong> IBAN AO123456789012345678901234</p>
-                  <p><strong>Titular:</strong> Facillovable Lda</p>
+              {!isFreeRequest && (
+                <div className="p-4 rounded-xl bg-accent border border-primary/20">
+                  <h3 className="font-display font-semibold text-foreground mb-3">
+                    Dados para Pagamento
+                  </h3>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <p><strong>Multicaixa Express:</strong> 927 800 658</p>
+                    <p><strong>Titular:</strong> Manuel Bessa Mendes</p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="space-y-2">
                 <Label className="text-foreground font-medium">
-                  Comprovante de Pagamento *
+                  Comprovante de Pagamento {!isFreeRequest ? "(recomendado)" : "(opcional)"}
                 </Label>
                 <div
                   onClick={() => fileInputRef.current?.click()}
