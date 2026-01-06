@@ -13,16 +13,19 @@ interface SuccessMessageProps {
 }
 
 export const SuccessMessage = ({ data, onBackHome }: SuccessMessageProps) => {
+  const adminWhatsApp = "244927800658";
+  
   const whatsappMessage = encodeURIComponent(
-    `Olá! Acabei de solicitar ${data.creditsAmount} créditos Lovable.\n\n` +
-    `Nome: ${data.fullName}\n` +
-    `WhatsApp: ${data.whatsapp}\n` +
-    `Link: ${data.inviteLink}\n` +
-    `Tipo: ${data.isFreeRequest ? "Solicitação Gratuita" : "Pagamento realizado"}\n\n` +
-    `Aguardo confirmação. Obrigado!`
+    `🎯 *Nova Solicitação Facillovable*\n\n` +
+    `👤 *Nome:* ${data.fullName}\n` +
+    `📱 *WhatsApp:* ${data.whatsapp}\n` +
+    `🔗 *Link:* ${data.inviteLink}\n` +
+    `💳 *Créditos:* ${data.creditsAmount}\n` +
+    `📋 *Tipo:* ${data.isFreeRequest ? "Solicitação Gratuita (1ª vez)" : "Pagamento Realizado"}\n\n` +
+    `Aguardo a entrega dos créditos. Obrigado!`
   );
 
-  const whatsappLink = `https://wa.me/244923456789?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/${adminWhatsApp}?text=${whatsappMessage}`;
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20">
